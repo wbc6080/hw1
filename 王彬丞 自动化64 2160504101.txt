@@ -1,0 +1,103 @@
+f8=imread('lena.bmp');
+[x,y]=size(f8);
+f7=zeros(x,y);
+f6=zeros(x,y);
+f5=zeros(x,y);
+f4=zeros(x,y);
+f3=zeros(x,y);
+f2=zeros(x,y);
+f1=zeros(x,y);
+for i=1:x
+    for j=1:y
+        f7(i,j)=floor(f8(i,j)/2);
+        f6(i,j)=floor(f8(i,j)/4);
+        f5(i,j)=floor(f8(i,j)/8);
+        f4(i,j)=floor(f8(i,j)/16);
+        f3(i,j)=floor(f8(i,j)/32);
+        f2(i,j)=floor(f8(i,j)/64);
+        f1(i,j)=floor(f8(i,j)/128);
+    end 
+end
+figure(1)
+imshow(f1,[0,1])
+title('1灰度级');
+figure(2)
+imshow(f2,[0,3])
+title('2灰度级');
+figure(3)
+imshow(f3,[0,7])
+title('3灰度级');
+figure(4)
+imshow(f4,[0,15])
+title('4灰度级');
+figure(5)
+imshow(f5,[0,31])
+title('5灰度级');
+figure(6)
+imshow(f6,[0,63])
+title('6灰度级');
+figure(7)
+imshow(f7,[0,127])
+title('7灰度级');
+figure(8)
+imshow(f8,[0,255])
+title('8灰度级');
+
+
+q3.m
+f=imread('lena.bmp');
+a=mean2(f)
+b=std2(f);
+b=b^2
+
+
+q4.m
+f=imread('lena.bmp');
+f1=imresize(f,[2048 2048],'nearest');
+f2=imresize(f,[2048 2048],'bilinear');
+f3=imresize(f,[2048 2048],'bicubic');
+figure(1)
+imshow(f1)
+title('最近邻插值');
+figure(2)
+imshow(f2)
+title('双线性插值');
+figure(3)
+imshow(f3)
+title('双三次插值');
+
+
+q5.m
+fl=imread('lena.bmp');
+T=[1 1.5 0;0 1 0;0 0 1];
+fl_make=maketform('affine',T);
+fl_shear=imtransform(fl,fl_make);
+f_nearest=imresize(fl_shear,[2048 2048],'nearest');
+f_bilinear=imresize(fl_shear,[2048 2048],'bilinear');
+f_bicubic=imresize(fl_shear,[2048 2048],'bicubic');
+figure(1)
+imshow(f_nearest)
+title('水平偏移 最近邻插值');
+figure(2)
+imshow(f_bilinear)
+title('水平偏移 双线性插值');
+figure(3)
+imshow(f_bicubic)
+title('水平偏移 双三次插值');
+
+
+q6.m
+fe=imread('elain1.bmp');
+fe_rotate=imrotate(fe,30);
+fe_nearest=imresize(fe_rotate,[2048 2048],'nearest');
+fe_bilinear=imresize(fe_rotate,[2048 2048],'bilinear');
+fe_bicubic=imresize(fe_rotate,[2048 2048],'bicubic');
+figure(1)
+imshow(fe_nearest)
+title('旋转30度 最近邻插值');
+figure(2)
+imshow(fe_bilinear)
+title('旋转30度 双线性插值');
+figure(3)
+imshow(fe_bicubic)
+title('旋转30度 双三次插值');
